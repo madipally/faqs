@@ -1,0 +1,50 @@
+<% provide(:title,"Create Question") %>
+<h1>Create Question</h1>
+
+<div class="container-fluid">
+        <%= form_for(@question) do |f| %>
+          <%= render partial: 'shared/error_messages', :locals => {:obj => @question} %>
+          <div class="row">
+             <div class="col-md-3">  
+                  <%= f.label :subject %>
+                  <% subjects = options_from_collection_for_select(@subjects, :id, :name) %>
+                  <%= f.select :subject,subjects, { :prompt => 'Select Subject' } %>
+             </div>
+             <div class="col-md-3">
+                <%= f.label :asked %>
+                <%= f.text_field :asked_by %>
+             </div>
+             <div class="col-md-3">
+                    <div class='col-md-12 question-type'>
+                         <div class='col-md-2'>
+                             <%= f.label "Type" %>
+                         </div>
+                         <div class='col-md-5'>
+                             <%= f.label :question_type_descriptive,'Descriptve'%> 
+                             <%= f.radio_button :question_type,'descriptive',:checked => true %> 
+                         </div>
+                         <div class='col-md-5'>
+                             <%= f.label :question_type_multiple,'Multiple' %>
+                             <%= f.radio_button :question_type,'multiple' %>
+                         </div>
+                    </div>
+             </div>
+             <div class="col-md-3">
+                 <% ratings_array = [[1,1],[2,2],[3,3],[4,4],[5,5]]%>
+                 <%= f.label :rating %>
+                 <%= f.select(:rating,options_for_select(ratings_array)) %>
+             </div>
+          </div>
+          <div class="row">
+              <div class="col-md-12">
+                  <%= f.label :question %>
+                  <%= f.text_area :question %>
+              </div>
+          </div>
+          <div class="row">
+              <div class="col-md-12" id="question_choices" style="display:none">
+                <%= render partial: "choices" %>
+              </div>
+          </div>
+        <% end %>
+</div>

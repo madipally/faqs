@@ -1,0 +1,22 @@
+  <div class="container">
+    <% if flash[:notice] %>
+        <div class="alert alert-success" align="center">
+          <%= flash[:notice] %>
+        </div>
+    <% end %>    
+    <div class="col-sm-12">
+      <div class="row">
+        <div class="thumbnail">
+          <%= image_tag @data['profile_picture'] %>
+          <div class="caption">
+            <%= @data['username'] %>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <% @r_data.each do |popular| %>
+         <%= image_tag popular['images']['low_resolution']['url'] %>
+        <% end %>
+      </div>
+    </div>
+  </div>  
